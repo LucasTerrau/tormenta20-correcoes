@@ -1,0 +1,41 @@
+/**
+ * Resumo das condições para as dicas dos assistentes (o sistema cria as condições sem descrição). Resumo próprio só com
+ * os efeitos de jogo; o texto completo está no Jogo do Ano, "Lista de Condições" (p. 394–395). Chave: nome sem acentos.
+ */
+export const CONDICOES = {
+	abalado: "–2 em testes de perícia. Ficar abalado de novo vira apavorado. <em>Medo.</em>",
+	agarrado: "Desprevenido e imóvel; –2 em ataques e só ataca com armas leves. Disparos contra quem está numa manobra agarrar têm 50% de chance de ir para o alvo errado. <em>Movimento.</em>",
+	alquebrado: "Habilidades custam +1 PM. <em>Mental.</em>",
+	apavorado: "–5 em testes de perícia; não se aproxima por vontade própria da fonte do medo. <em>Medo.</em>",
+	atordoado: "Desprevenido; não faz ações. <em>Mental.</em>",
+	caido: "–5 em ataques corpo a corpo e deslocamento 1,5m. Na Defesa: –5 contra corpo a corpo e +5 contra ataques à distância.",
+	cego: "Desprevenido e lento; sem Percepção para observar; –5 em perícias de Força e Destreza; os alvos dos seus ataques têm camuflagem total. Escuridão total cega quem não enxerga no escuro. <em>Sentidos.</em>",
+	confuso: "Age ao acaso. No início do turno, 1d6: 1) anda numa direção sorteada com 1d8; 2–3) não age; 4–5) ataca a criatura mais próxima com o que empunha (ou a si mesmo, se estiver só); 6) a condição acaba. <em>Mental.</em>",
+	debilitado: "–5 em testes de Força, Destreza e Constituição e nas perícias desses atributos. Ficar debilitado de novo deixa inconsciente.",
+	desprevenido: "–5 na Defesa e em Reflexos. Vale contra inimigos que você não percebe.",
+	doente: "Sob efeito de uma doença. <em>Metabolismo.</em>",
+	"em chamas": "Sofre 1d6 de dano de fogo no início de cada turno. Uma ação padrão apaga o fogo; entrar na água também.",
+	enfeiticado: "Fica prestativo com a fonte e interpreta tudo o que ela faz do jeito mais favorável, sem ficar sob controle. A fonte ganha +10 em Diplomacia com ele. <em>Mental.</em>",
+	enjoado: "Só faz uma ação padrão ou de movimento por rodada. A investida avança no máximo o deslocamento normal. <em>Metabolismo.</em>",
+	enredado: "Lento e vulnerável; –2 em ataques. <em>Movimento.</em>",
+	envenenado: "Depende do veneno: perda de vida a cada turno (soma com outros venenos) ou outra condição, como fraco ou enjoado. <em>Veneno.</em>",
+	esmorecido: "–5 em testes de Inteligência, Sabedoria e Carisma e nas perícias desses atributos. <em>Mental.</em>",
+	exausto: "Debilitado, lento e vulnerável. Ficar exausto de novo deixa inconsciente. <em>Cansaço.</em>",
+	fascinado: "–5 em Percepção; só pode observar o que o fascinou. Acaba com uma ação hostil contra ele ou se a coisa sumir de vista; sacudi-lo custa uma ação padrão. <em>Mental.</em>",
+	fatigado: "Fraco e vulnerável. Ficar fatigado de novo vira exausto. <em>Cansaço.</em>",
+	fraco: "–2 em testes de Força, Destreza e Constituição e nas perícias desses atributos. Ficar fraco de novo vira debilitado.",
+	frustrado: "–2 em testes de Inteligência, Sabedoria e Carisma e nas perícias desses atributos. Ficar frustrado de novo vira esmorecido. <em>Mental.</em>",
+	imovel: "Todo deslocamento vira 0m. <em>Movimento.</em>",
+	inconsciente: "Indefeso; não faz ações nem reações (só os testes próprios de quem está desacordado, como estabilizar). Acordá-lo custa uma ação padrão.",
+	indefeso: "Desprevenido, mas com –10 na Defesa; falha em Reflexos e pode sofrer golpe de misericórdia.",
+	lento: "Deslocamento pela metade (arredonde para baixo em incrementos de 1,5m); não corre nem faz investida. <em>Movimento.</em>",
+	ofuscado: "–2 em ataques e em Percepção. <em>Sentidos.</em>",
+	paralisado: "Imóvel e indefeso; só faz ações puramente mentais. <em>Movimento.</em>",
+	pasmo: "Não faz ações. <em>Mental.</em>",
+	petrificado: "Inconsciente, com redução de dano 8. <em>Metamorfose.</em>",
+	sangrando: "No início do turno, Constituição CD 15: falha perde 1d6 PV e continua sangrando; sucesso encerra a condição. <em>Metabolismo.</em>",
+	sobrecarregado: "Penalidade de armadura –5 e deslocamento –3m. <em>Movimento.</em>",
+	surdo: "Sem Percepção para ouvir; –5 em Iniciativa; lança magias em condição ruim. <em>Sentidos.</em>",
+	surpreendido: "Desprevenido; não faz ações.",
+	vulneravel: "–2 na Defesa."
+};

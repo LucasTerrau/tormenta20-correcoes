@@ -1,0 +1,62 @@
+{
+  "id": "tormenta20-correcoes",
+  "title": "Tormenta20 — Correções de Regras",
+  "description": "Corrige bugs do sistema Tormenta20 (v1.6.5) para que ele siga as regras do livro: custo e limite de PM de magias, aprimoramentos, acúmulo de bônus e efeitos dos módulos Bestiário/Suplementos de Arton. Cada correção pode ser ligada ou desligada nas configurações.",
+  "version": "0.1.0",
+  "authors": [
+    {
+      "name": "Terrinha (Lucas Terra)",
+      "url": "https://github.com/LucasTerrau"
+    }
+  ],
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14.367"
+  },
+  "socket": true,
+  "esmodules": [
+    "scripts/main.mjs"
+  ],
+  "styles": [
+    "styles/assistentes.css"
+  ],
+  "packs": [
+    {
+      "name": "itens-do-livro",
+      "label": "Itens do livro (Correções T20)",
+      "type": "Item",
+      "path": "packs/itens-do-livro",
+      "system": "tormenta20",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    }
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "tormenta20",
+        "type": "system",
+        "compatibility": {
+          "minimum": "1.6.5",
+          "verified": "1.6.5"
+        }
+      }
+    ],
+    "requires": [
+      {
+        "id": "lib-wrapper",
+        "type": "module",
+        "reason": "Usado para corrigir métodos do sistema sem substituí-los.",
+        "manifest": "https://github.com/ruipin/fvtt-lib-wrapper/releases/latest/download/module.json"
+      }
+    ]
+  },
+  "url": "https://github.com/LucasTerrau/tormenta20-correcoes",
+  "bugs": "https://github.com/LucasTerrau/tormenta20-correcoes/issues",
+  "manifest": "https://github.com/LucasTerrau/tormenta20-correcoes/releases/latest/download/module.json",
+  "download": "https://github.com/LucasTerrau/tormenta20-correcoes/releases/download/v0.1.0/module.zip",
+  "license": "LICENSE",
+  "readme": "README.md"
+}
