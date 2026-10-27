@@ -191,20 +191,27 @@ function prepararHabilidade(app, root) {
 		const regra = aumentosPorNivel(dono, info.nivel);
 		const aumentos = lista.filter((l) => l.effect.system.abilityUse.aumenta);
 		if (!regra || !aumentos.length) continue;
+		// Poder puxado para o ataque de outro item só com contadores (Ataque Especial: "1 PM para +4", sem linha base):
+		// o custo do próprio poder não é cobrado, então o primeiro PM é o uso normal e o "a cada N níveis" soma aumentos
+		// a ele. Usado pelo próprio poder (Marca da Presa, Duelo), o custo do poder já é o uso normal.
+		const usoNormal = dono.id !== item.id && aumentos.length === lista.length ? 1 : 0;
+		const maximo = regra.maximo + usoNormal;
 		const nivel = `${info.classe ? `${info.classe} ${info.nivel}` : `nível ${info.nivel}`}`;
 		const conta = `${dono.name}: a cada ${regra.passo} níveis${regra.depois ? " após o 1º" : ""}; ${nivel}`;
-		app._t20cOrcamentos.push({ maximo: regra.maximo, nomes: new Set(aumentos.map((l) => l.input.name)) });
+		app._t20cOrcamentos.push({ maximo, nomes: new Set(aumentos.map((l) => l.input.name)) });
 		for (const linha of aumentos) {
-			if (regra.maximo === 0) {
+			if (maximo === 0) {
 				bloquear(linha, `Ainda não dá para gastar PM extra (${conta}).`);
 				linha.li.dataset.t20cFixo = "1";
 				continue;
 			}
 			const aviso = document.createElement("span");
 			aviso.className = "t20c-maximo";
-			aviso.textContent = ` (máx. ${regra.maximo}${aumentos.length > 1 ? " no total" : ""})`;
+			aviso.textContent = ` (máx. ${maximo}${aumentos.length > 1 ? " no total" : ""})`;
 			aviso.style.cssText = "font-size: 0.85em; opacity: 0.8;";
-			aviso.dataset.tooltip = `Aumentos permitidos pelo nível: ${regra.maximo} (${conta}).`;
+			aviso.dataset.tooltip = usoNormal
+				? `Até ${maximo} PM: 1 do uso normal + ${regra.maximo} pelo nível (${conta}).`
+				: `Aumentos permitidos pelo nível: ${maximo} (${conta}).`;
 			(linha.li.querySelector(".item-name") ?? linha.li).append(aviso);
 		}
 	}
