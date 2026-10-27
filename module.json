@@ -2,7 +2,7 @@
   "id": "tormenta20-correcoes",
   "title": "Tormenta20 — Correções de Regras",
   "description": "Corrige bugs do sistema Tormenta20 (v1.6.5) para que ele siga as regras do livro: custo e limite de PM de magias, aprimoramentos, acúmulo de bônus e efeitos dos módulos Bestiário/Suplementos de Arton. Cada correção pode ser ligada ou desligada nas configurações.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "authors": [
     {
       "name": "Terrinha (Lucas Terra)",
@@ -56,7 +56,7 @@
   "url": "https://github.com/LucasTerrau/tormenta20-correcoes",
   "bugs": "https://github.com/LucasTerrau/tormenta20-correcoes/issues",
   "manifest": "https://github.com/LucasTerrau/tormenta20-correcoes/releases/latest/download/module.json",
-  "download": "https://github.com/LucasTerrau/tormenta20-correcoes/releases/download/v0.1.1/module.zip",
+  "download": "https://github.com/LucasTerrau/tormenta20-correcoes/releases/download/v0.1.2/module.zip",
   "license": "LICENSE",
   "readme": "README.md"
 }

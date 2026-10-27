@@ -197,7 +197,9 @@ function prepararHabilidade(app, root) {
 		const usoNormal = dono.id !== item.id && aumentos.length === lista.length ? 1 : 0;
 		const maximo = regra.maximo + usoNormal;
 		const nivel = `${info.classe ? `${info.classe} ${info.nivel}` : `nível ${info.nivel}`}`;
-		const conta = `${dono.name}: a cada ${regra.passo} níveis${regra.depois ? " após o 1º" : ""}; ${nivel}`;
+		const conta = regra.niveis
+			? `${dono.name}: aumentos no ${regra.niveis.map((n) => `${n}º`).join(", ")} nível, pela tabela da classe; ${nivel}`
+			: `${dono.name}: a cada ${regra.passo} níveis${regra.depois ? " após o 1º" : ""}; ${nivel}`;
 		app._t20cOrcamentos.push({ maximo, nomes: new Set(aumentos.map((l) => l.input.name)) });
 		for (const linha of aumentos) {
 			if (maximo === 0) {

@@ -216,10 +216,28 @@ export function limiteDeHabilidade(actor, item) {
 const NUMEROS = { dois: 2, tres: 3, quatro: 4, cinco: 5, seis: 6 };
 
 /**
+ * Níveis da classe em que cada aumento libera, pelas tabelas das classes (JdA cap. 1). O texto só diz "a cada N
+ * níveis", e as tabelas contam a partir do nível em que a habilidade é ganha: Ataque Especial (1º) aumenta no 5º, 9º…;
+ * Duelo (2º) no 7º, 12º e 17º. A Fúria é a exceção: 5º, 10º e 15º.
+ */
+const NIVEIS_DOS_AUMENTOS = {
+	ataqueespecial: [5, 9, 13, 17], // Guerreiro
+	baluarte: [5, 9, 13, 17], // Cavaleiro
+	curapelasmaos: [6, 10, 14, 18], // Paladino
+	duelo: [7, 12, 17], // Cavaleiro
+	furia: [5, 10, 15], // Bárbaro
+	golpedivino: [5, 9, 13, 17], // Paladino
+	inspiracao: [5, 9, 13, 17], // Bardo
+	marcadapresa: [5, 9, 13, 17], // Caçador
+	palavrasafiadas: [6, 10, 14, 18] // Nobre
+};
+
+/**
  * "A cada quatro níveis, você pode gastar +1 PM para aumentar…" (Ataque Especial, Golpe Divino,
- * Fúria, Inspiração…): quantos aumentos o nível permite. Também "a cada quatro níveis após o 1º".
+ * Fúria, Inspiração…): quantos aumentos o nível permite. Poderes do Jogo do Ano seguem a tabela da classe
+ * (NIVEIS_DOS_AUMENTOS); os outros, a conta do texto. Também "a cada quatro níveis após o 1º".
  * Fórmulas fora do padrão ("a cada cinco níveis seguintes (11º e 16º)") ficam de fora.
- * @returns {{maximo: number, passo: number, depois: number}|null}
+ * @returns {{maximo: number, passo: number, depois: number, niveis?: number[]}|null}
  */
 export function aumentosPorNivel(item, nivel) {
 	const texto = normalizar(item.system?.description?.value);
@@ -228,6 +246,8 @@ export function aumentosPorNivel(item, nivel) {
 	const passo = NUMEROS[m[1]] ?? Number(m[1]);
 	if (!passo) return null;
 	const depois = /(apos|acima d)o 1/.test(m[2]) ? 1 : 0;
+	const niveis = NIVEIS_DOS_AUMENTOS[slug(item.name)];
+	if (niveis) return { maximo: niveis.filter((n) => nivel >= n).length, passo, depois, niveis };
 	return { maximo: Math.max(0, Math.floor((nivel - depois) / passo)), passo, depois };
 }
 
