@@ -154,10 +154,59 @@ function aplicarRegrasGerais(item, stats) {
 	return mudou;
 }
 
+const ATRIBUTO_POR_NOME = { inteligencia: "int", sabedoria: "sab", carisma: "car" };
+
+/**
+ * A habilidade Magias das classes dos suplementos (Frade, Usurpador, Ermitão…) diz "você soma sua Sabedoria no seu
+ * total de PM", mas não traz o efeito que o sistema põe nas classes do Jogo do Ano (Magias (Clérigo):
+ * pm.atributos.sab ligado): o atributo nunca entrava nos PM. Nas variantes do arcanista (Necromante) o atributo vem do
+ * Caminho ("Seu atributo-chave para magias é Inteligência"), como nos Caminhos do arcanista que este módulo cria.
+ * Lê o atributo do texto e cria o mesmo efeito.
+ */
+function atributoNosPm(item, stats) {
+	if (item.type !== "poder") return false;
+	const magias = /^Magias \(/.test(item.name ?? "");
+	const caminho = /^Caminho do Arcanista/.test(item.name ?? "");
+	if (!magias && !caminho) return false;
+	const texto = normalizar(String(item.system?.description?.value ?? "").replace(/<[^>]+>|&nbsp;/g, " ")).replace(/\s+/g, " ");
+	const m = magias
+		? texto.match(/soma (?:sua|seu) (?:bonus de )?(inteligencia|sabedoria|carisma) (?:no|em|ao) seu total de pm/)
+		: texto.match(/seu atributo-chave para (?:lancar )?magias e (inteligencia|sabedoria|carisma)/);
+	if (!m) return false;
+	item.effects ??= [];
+	const jaSoma = item.effects.some((e) => (e.system?.changes ?? []).some((c) => String(c.key).startsWith("system.attributes.pm.atributos.")));
+	if (jaSoma) return false;
+	const atributo = ATRIBUTO_POR_NOME[m[1]];
+	item.effects.push({
+		_id: `t20cPmAtr${atributo[0].toUpperCase()}${atributo.slice(1)}0000`,
+		name: item.name,
+		img: item.img,
+		type: "base",
+		transfer: true,
+		disabled: false,
+		duration: { value: null, units: "seconds", expiry: null, expired: false },
+		flags: { [MODULE_ID]: { atributoNosPm: atributo } },
+		system: {
+			changes: [{ key: `system.attributes.pm.atributos.${atributo}`, value: true, priority: null, type: "override", phase: "initial" }],
+			targets: [],
+			status: null,
+			onuse: false,
+			abilityUse: { description: "", automatic: false, aumenta: false, custo: null, names: [], types: [] },
+			aura: { isAura: false, range: 0, disposition: [] }
+		},
+		description: "",
+		statuses: [],
+		sort: 0
+	});
+	contar(stats, "magias-atributo-nos-pm");
+	return true;
+}
+
 /** @returns {boolean} se mudou algo */
 export function corrigirSuplementos(item, stats) {
 	if (!item) return false;
 	const tabela = aplicarTabela(item, stats);
 	const gerais = aplicarRegrasGerais(item, stats);
-	return tabela || gerais;
+	const pm = atributoNosPm(item, stats);
+	return tabela || gerais || pm;
 }
