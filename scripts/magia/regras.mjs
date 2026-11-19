@@ -19,7 +19,15 @@ const CLASSES_CONJURADORAS = {
 	// Variante de bardo (Heróis de Arton p. 33): "Magias. Como o bardo básico."
 	magimarcialista: { tipos: ["arc"], progressao: "lenta", atributo: "car" },
 	clerigo: { tipos: ["div"], progressao: "rapida", atributo: "sab" },
-	druida: { tipos: ["div"], progressao: "lenta", atributo: "sab" }
+	druida: { tipos: ["div"], progressao: "lenta", atributo: "sab" },
+	// Suplementos (texto da habilidade Magias de cada uma): sem estas, a CD das magias ficava com o atributo da ficha
+	// (Int por padrão) e o limite de PM e o círculo não eram conferidos.
+	frade: { tipos: ["div"], progressao: "rapida", atributo: "sab" }, // Deuses de Arton
+	usurpador: { tipos: ["div"], progressao: "rapida", atributo: "car" }, // Heróis de Arton
+	ermitao: { tipos: ["div"], progressao: "lenta", atributo: "sab" }, // Heróis de Arton
+	necromante: { tipos: ["arc"], progressao: "rapida", atributo: "int" }, // Heróis de Arton (Caminho: Necromante)
+	ventanista: { tipos: ["arc"], progressao: "lenta", atributo: "int" }, // Heróis de Arton (Truques do Ofício)
+	mistico: { tipos: ["arc"], progressao: "lenta", atributo: "sab" } // Guia de NPCs
 };
 
 /** Classes do livro básico que não lançam magias. */
@@ -221,6 +229,12 @@ const NUMEROS = { dois: 2, tres: 3, quatro: 4, cinco: 5, seis: 6 };
  * Duelo (2º) no 7º, 12º e 17º. A Fúria é a exceção: 5º, 10º e 15º.
  */
 const NIVEIS_DOS_AUMENTOS = {
+	// Variantes do Heróis de Arton com tabela própria (a chave com a classe vale antes da chave só com o nome).
+	"duelo|duelista": [6, 11, 16], // Duelo +3 no 6º, +4 no 11º, +5 no 16º
+	"furia|machadodepedra": [6, 11, 16], // Fúria +3 no 6º, +4 no 11º, +5 no 16º
+	domarcriatura: [6, 10, 14, 18], // Treinador: 4d8 no 6º, 6d8 no 10º, 8d8 no 14º, 10d8 no 18º
+	ladainhadecombate: [5, 9, 13, 17], // Santo: +2 no 5º, +3 no 9º, +4 no 13º, +5 no 17º
+	sequenciaespecial: [5, 9, 13, 17], // Inovador: +4 no 5º, +6 no 9º, +8 no 13º, +10 no 17º
 	ataqueespecial: [5, 9, 13, 17], // Guerreiro
 	baluarte: [5, 9, 13, 17], // Cavaleiro
 	curapelasmaos: [6, 10, 14, 18], // Paladino
@@ -246,7 +260,7 @@ export function aumentosPorNivel(item, nivel) {
 	const passo = NUMEROS[m[1]] ?? Number(m[1]);
 	if (!passo) return null;
 	const depois = /(apos|acima d)o 1/.test(m[2]) ? 1 : 0;
-	const niveis = NIVEIS_DOS_AUMENTOS[slug(item.name)];
+	const niveis = NIVEIS_DOS_AUMENTOS[`${slug(item.name)}|${slug(item.system?.subtipo)}`] ?? NIVEIS_DOS_AUMENTOS[slug(item.name)];
 	if (niveis) return { maximo: niveis.filter((n) => nivel >= n).length, passo, depois, niveis };
 	return { maximo: Math.max(0, Math.floor((nivel - depois) / passo)), passo, depois };
 }

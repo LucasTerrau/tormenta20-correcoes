@@ -1,5 +1,5 @@
 import { MODULE_ID } from "../constants.mjs";
-import { warn, wrap } from "../util.mjs";
+import { modoDoChat, warn, wrap } from "../util.mjs";
 
 /**
  * Regras de testes e iniciativa (JdA p. 220–222, 231, 234):
@@ -58,7 +58,7 @@ async function opor(message, pericia, total, bonus) {
 		if (venceu && game.user.isGM) texto += await consequencia(pericia, alvo.actor, diferenca);
 		linhas.push(texto);
 	}
-	await ChatMessage.create({ speaker: message.speaker, content: `<p><strong>Teste oposto</strong> (${total})</p><ul>${linhas.map((l) => `<li>${l}</li>`).join("")}</ul>` });
+	await ChatMessage.create({ speaker: message.speaker, content: `<p><strong>Teste oposto</strong> (${total})</p><ul>${linhas.map((l) => `<li>${l}</li>`).join("")}</ul>` }, modoDoChat());
 }
 
 async function aplicarCondicao(actor, status, duracao) {

@@ -4,6 +4,19 @@ export function log(...args) {
 	console.log(`${MODULE_ID} |`, ...args);
 }
 
+/**
+ * Opções de criação de mensagem com o modo do chat de quem cria (público, só o mestre, às cegas…), como o
+ * Roll#toMessage já faz. Sem isso, ChatMessage.create sai sempre público: o mestre rolava o teste do NPC em
+ * modo privado e a mensagem seguinte do módulo (perda de vida, cura, resumo) mostrava os números a todos.
+ */
+export function modoDoChat() {
+	try {
+		return { messageMode: game.settings.get("core", "messageMode") };
+	} catch {
+		return {};
+	}
+}
+
 export function warn(...args) {
 	console.warn(`${MODULE_ID} |`, ...args);
 }

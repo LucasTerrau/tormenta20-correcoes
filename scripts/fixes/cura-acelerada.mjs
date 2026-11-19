@@ -1,6 +1,6 @@
 import { MODULE_ID } from "../constants.mjs";
 import { equipado } from "../magia/regras.mjs";
-import { warn, wrap } from "../util.mjs";
+import { modoDoChat, warn, wrap } from "../util.mjs";
 
 /**
  * Regra (JdA p. 228): "Cura acelerada X/tipo. No início de seu turno, a criatura recupera X pontos de
@@ -46,7 +46,7 @@ async function curar(actor) {
 	const excecoes = lista.filter((c) => c.exceto).map((c) => c.exceto);
 	const nota = excecoes.length ? ` (não vale se sofreu dano de ${excecoes.join(" ou ")} desde o último turno)` : "";
 	const roll = await new Roll(`${total}[curapv]`).evaluate();
-	await ChatMessage.create({ speaker: ChatMessage.getSpeaker({ actor }), flavor: `Cura acelerada ${total}${nota}`, rolls: [roll] });
+	await ChatMessage.create({ speaker: ChatMessage.getSpeaker({ actor }), flavor: `Cura acelerada ${total}${nota}`, rolls: [roll] }, modoDoChat());
 }
 
 export default {

@@ -1,4 +1,4 @@
-import { warn, wrap } from "../util.mjs";
+import { modoDoChat, warn, wrap } from "../util.mjs";
 
 /**
  * Condições que o sistema só marcava (JdA p. 394–395):
@@ -28,7 +28,7 @@ async function rolarConfuso(actor) {
 		rolls.push(direcao);
 		texto += ` — direção ${direcao.total}`;
 	}
-	await ChatMessage.create({ speaker: ChatMessage.getSpeaker({ actor }), flavor: `Confuso (1d6 = ${roll.total}): ${texto}.`, rolls });
+	await ChatMessage.create({ speaker: ChatMessage.getSpeaker({ actor }), flavor: `Confuso (1d6 = ${roll.total}): ${texto}.`, rolls }, modoDoChat());
 	if (roll.total === 6) {
 		const ids = actor.effects.filter((e) => e.statuses.has("confuso")).map((e) => e.id);
 		if (ids.length) await actor.deleteEmbeddedDocuments("ActiveEffect", ids);

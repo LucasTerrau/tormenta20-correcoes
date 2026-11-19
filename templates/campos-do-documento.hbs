@@ -1,0 +1,6 @@
+{{!-- Editor de campos do sistema (comportamentos de região da área, JSON de aura): o molde que o sistema 1.6.5 aponta não existe. --}}
+<section class="flexcol">
+	{{#each fields}}
+		{{formGroup this.field value=this.value localize=true}}
+	{{/each}}
+</section>

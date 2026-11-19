@@ -165,7 +165,8 @@ const ATRIBUTO_POR_NOME = { inteligencia: "int", sabedoria: "sab", carisma: "car
  */
 function atributoNosPm(item, stats) {
 	if (item.type !== "poder") return false;
-	const magias = /^Magias \(/.test(item.name ?? "");
+	// "Magias (Frade)" etc.; o Místico (Guia de NPCs) tem a habilidade só como "Magias".
+	const magias = /^Magias( \(|$)/.test(item.name ?? "");
 	const caminho = /^Caminho do Arcanista/.test(item.name ?? "");
 	if (!magias && !caminho) return false;
 	const texto = normalizar(String(item.system?.description?.value ?? "").replace(/<[^>]+>|&nbsp;/g, " ")).replace(/\s+/g, " ");

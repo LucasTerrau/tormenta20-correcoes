@@ -1,3 +1,4 @@
+import { modoDoChat } from "../util.mjs";
 /**
  * Bug: o botão de condição do cartão (Em Chamas da Explosão de Chamas, Imóvel do Campo de Força…)
  * aplica a condição em todos os tokens selecionados, mesmo nos que passariam na resistência.
@@ -58,7 +59,7 @@ async function aplicarComResistencia(message, efeitos, resistencia, tokens) {
 			await ChatMessage.create({
 				speaker: ChatMessage.getSpeaker({ token: token.document }),
 				flavor: `${resistencia.nome} (CD ${resistencia.cd}) contra ${nomes}: indefeso, falha automaticamente, fica ${nomes.toLowerCase()}`
-			});
+			}, modoDoChat());
 			await actor.createEmbeddedDocuments("ActiveEffect", foundry.utils.deepClone(dados), { toChat: true });
 			continue;
 		}

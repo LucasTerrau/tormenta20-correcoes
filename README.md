@@ -22,7 +22,7 @@ https://github.com/LucasTerrau/tormenta20-correcoes/releases/latest/download/mod
 
 As atualizações chegam pelo próprio Foundry.
 
-## Correções (70)
+## Correções (73)
 
 - 0 PV e morte
 - Acúmulo de bônus pela regra do livro
@@ -55,8 +55,10 @@ As atualizações chegam pelo próprio Foundry.
 - Descanso pelas contas do livro
 - Dilacerante e Lancinante no crítico
 - Doenças: exposição, teste do dia e cura
+- Editor de comportamentos de região
 - Efeitos antigos do Bestiário, Suplementos e NPCs importados
 - Efeitos de tokens sem vínculo expiram depois de recarregar
+- Efeitos de uso com descrição em texto puro
 - Encantos com parte ativada (2 PM e afins)
 - Escolhas de magia dos poderes
 - Esotéricos empunhados e um por magia
@@ -75,6 +77,7 @@ As atualizações chegam pelo próprio Foundry.
 - Magias: pré-requisito e teto de círculo dos aprimoramentos
 - Magias: Truque não combina com outros aprimoramentos
 - Magimarcialista: cargas arcanas e marciais
+- Menu do chat: aplicar dano, cura e mana
 - Novo personagem
 - Penalidade de armadura: reduções reduzem
 - Poderes da Tormenta tiram Carisma

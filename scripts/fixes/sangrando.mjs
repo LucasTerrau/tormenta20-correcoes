@@ -1,5 +1,5 @@
 import { MODULE_ID } from "../constants.mjs";
-import { warn, wrap } from "../util.mjs";
+import { modoDoChat, warn, wrap } from "../util.mjs";
 
 /**
  * Regra (JdA p. 394): "Sangrando. No início de seu turno, o personagem deve fazer um teste de
@@ -42,7 +42,7 @@ async function sangrar(actor) {
 	let passou = false;
 	if (marcados.length) {
 		await actor.updateEmbeddedDocuments("ActiveEffect", marcados.map((e) => ({ _id: e.id, [`flags.${MODULE_ID}.falhaNoProximoTeste`]: false })));
-		await ChatMessage.create({ speaker, flavor: "Sangrando: falha automática no teste de Constituição (o sangramento piorou)" });
+		await ChatMessage.create({ speaker, flavor: "Sangrando: falha automática no teste de Constituição (o sangramento piorou)" }, modoDoChat());
 	} else {
 		const teste = await actor.rollAtributo("con", { event: { shiftKey }, message: false });
 		if (!teste) return;
@@ -60,7 +60,7 @@ async function sangrar(actor) {
 		return;
 	}
 	const perda = await new Roll(`1d${dadoDaPerda(actor)}[perda]`).evaluate();
-	await ChatMessage.create({ speaker, flavor: "Sangrando: perda de vida", rolls: [perda] });
+	await ChatMessage.create({ speaker, flavor: "Sangrando: perda de vida", rolls: [perda] }, modoDoChat());
 }
 
 export default {

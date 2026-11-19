@@ -7,6 +7,9 @@ import criarAprimoramento from "./criar-aprimoramento.mjs";
 import custoPmReal from "./custo-pm-real.mjs";
 import dadosCompendios from "./dados-compendios.mjs";
 import descanso from "./descanso.mjs";
+import descricaoDeEfeito from "./descricao-de-efeito.mjs";
+import menuDoChat from "./menu-do-chat.mjs";
+import editorDeCampos from "./editor-de-campos.mjs";
 import duracaoCondicoes from "./duracao-condicoes.mjs";
 import cdPersonagem from "./cd-personagem.mjs";
 import tamanhoArma from "./tamanho-arma.mjs";
@@ -67,6 +70,9 @@ import poderesDeUso from "./poderes-de-uso.mjs";
 export const FIXES = [
 	efeitosAntigos,
 	dadosCompendios,
+	descricaoDeEfeito,
+	menuDoChat,
+	editorDeCampos,
 	acumuloBonus,
 	reducaoCusto,
 	defesaAcessorios,
