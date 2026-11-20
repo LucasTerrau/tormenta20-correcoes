@@ -1,4 +1,4 @@
-import { MODULE_ID, SYSTEM_VERSION_VERIFIED } from "./constants.mjs";
+import { MODULE_ID, SYSTEM_VERSIONS_VERIFIED } from "./constants.mjs";
 import { FIXES } from "./fixes/index.mjs";
 import { log, warn } from "./util.mjs";
 
@@ -44,9 +44,9 @@ Hooks.once("ready", () => {
 			permanent: true
 		});
 	}
-	if (game.system.version !== SYSTEM_VERSION_VERIFIED && game.user.isGM) {
+	if (!SYSTEM_VERSIONS_VERIFIED.includes(game.system.version) && game.user.isGM) {
 		ui.notifications.warn(
-			`Tormenta20 — Correções foi conferido com o sistema ${SYSTEM_VERSION_VERIFIED}; você está usando ${game.system.version}. `
+			`Tormenta20 — Correções foi conferido com o sistema ${SYSTEM_VERSIONS_VERIFIED.join(" e ")}; você está usando ${game.system.version}. `
 				+ "Se algo estranho acontecer, desligue a correção suspeita nas configurações do módulo."
 		);
 	}

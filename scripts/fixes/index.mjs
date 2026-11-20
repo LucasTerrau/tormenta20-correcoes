@@ -10,6 +10,7 @@ import descanso from "./descanso.mjs";
 import descricaoDeEfeito from "./descricao-de-efeito.mjs";
 import menuDoChat from "./menu-do-chat.mjs";
 import editorDeCampos from "./editor-de-campos.mjs";
+import ataqueDePoder from "./ataque-de-poder.mjs";
 import duracaoCondicoes from "./duracao-condicoes.mjs";
 import cdPersonagem from "./cd-personagem.mjs";
 import tamanhoArma from "./tamanho-arma.mjs";
@@ -73,6 +74,7 @@ export const FIXES = [
 	descricaoDeEfeito,
 	menuDoChat,
 	editorDeCampos,
+	ataqueDePoder,
 	acumuloBonus,
 	reducaoCusto,
 	defesaAcessorios,

@@ -17,6 +17,45 @@ export function modoDoChat() {
 	}
 }
 
+/**
+ * Condição criada pelo módulo (camuflagem, cobertura leve, montado), no formato das do sistema. O sistema monta as
+ * suas a partir do compêndio de condições, com link e uuid; sem link, o cartão de um item cujo texto citasse a
+ * condição quebrava ao montar o "@STATUS[...]" ("Cannot read properties of null (reading 'dataset')"), e o botão de
+ * aplicar procurava um documento que não existe. Aqui a condição ganha um link, e o botão dela aplica a condição
+ * direto nos tokens selecionados.
+ */
+let enriquecedorAjustado = false;
+export function registrarCondicao(id, dados) {
+	if (!CONFIG.statusEffects || CONFIG.statusEffects[id]) return;
+	const nome = foundry.utils.escapeHTML?.(dados.name) ?? dados.name;
+	const link = `<a class="content-link t20c-condicao" data-t20c-condicao="${id}"><i class="fa-solid fa-circle-dot" inert></i>${nome}</a>`;
+	CONFIG.statusEffects[id] = { id, category: "", description: "", ...dados, link };
+	ajustarBotaoDeCondicao();
+}
+
+function ajustarBotaoDeCondicao() {
+	if (enriquecedorAjustado) return;
+	const lista = CONFIG.TextEditor?.enrichers;
+	const i = lista?.findIndex?.((e) => e.id === "applyEffect") ?? -1;
+	if (i < 0) return;
+	enriquecedorAjustado = true;
+	const original = lista[i];
+	lista[i] = {
+		...original,
+		onRender: async (element) => {
+			const botao = element.querySelector?.(".apply-effect");
+			const id = botao?.dataset.identifier;
+			const status = id ? CONFIG.statusEffects?.[id] : null;
+			if (!botao || !status || status.uuid) return original.onRender?.(element);
+			botao.addEventListener("click", async () => {
+				const tokens = canvas?.tokens?.controlled ?? [];
+				if (!tokens.length) return ui.notifications.error(game.i18n.localize("T20.SelectToken"));
+				for (const token of tokens) await token.actor?.toggleStatusEffect(id, { active: true });
+			});
+		}
+	};
+}
+
 export function warn(...args) {
 	console.warn(`${MODULE_ID} |`, ...args);
 }

@@ -1,4 +1,4 @@
-import { warn, wrap } from "../util.mjs";
+import { registrarCondicao, warn, wrap } from "../util.mjs";
 
 /**
  * Regra (JdA p. 244–245, Tabela 5-3 e Camuflagem): atacante cego tem 50% de chance de falha; alvo sob
@@ -21,7 +21,7 @@ function instalarCondicoes() {
 	for (const [id, dados] of Object.entries(CONDICOES)) {
 		if (CONFIG.statusEffects?.[id]) continue;
 		const fonte = { name: dados.name, img: dados.img, statuses: [id], duration: { expiry: "sceneEnd" }, system: { status: { category: "" } } };
-		CONFIG.statusEffects[id] = { id, name: dados.name, img: dados.img, category: "", description: "", _source: fonte };
+		registrarCondicao(id, { name: dados.name, img: dados.img, _source: fonte });
 	}
 }
 

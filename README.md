@@ -7,7 +7,7 @@ Módulo para o Foundry VTT que corrige bugs do sistema **Tormenta20** para ele s
 ## Requisitos
 
 - **Foundry VTT v14** (testado no build 367). Não funciona na v13.
-- **Sistema Tormenta20 1.6.5**.
+- **Sistema Tormenta20 1.6.5 ou 1.6.7** (conferido nas duas).
 - **libWrapper** (o Foundry instala junto).
 
 Se você joga na v13 e não quer migrar as mesas, dá para ter as duas versões instaladas, cada uma com sua pasta de dados (atalho com `--dataPath="..."`). Faça backup antes: abrir um mundo na v14 converte os dados e não tem volta.
@@ -22,7 +22,7 @@ https://github.com/LucasTerrau/tormenta20-correcoes/releases/latest/download/mod
 
 As atualizações chegam pelo próprio Foundry.
 
-## Correções (73)
+## Correções (74)
 
 - 0 PV e morte
 - Acúmulo de bônus pela regra do livro
@@ -32,6 +32,7 @@ As atualizações chegam pelo próprio Foundry.
 - Armas: Acuidade, Ágil, Estilo de Disparo e Briga
 - Assistente de efeitos: modo e Passo de Dano
 - Assistentes de criação e de subir de nível
+- Ataques de poderes e itens que não são arma
 - Atributos Dinâmicos das raças
 - Batata valkariana (+1d6 em um teste)
 - Bônus na hora da rolagem também seguem o acúmulo

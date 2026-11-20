@@ -1,7 +1,7 @@
 import { MODULE_ID } from "../constants.mjs";
 import { aprimoramentosAplicados, equipado } from "../magia/regras.mjs";
 import { ehEspada } from "./proficiencia.mjs";
-import { warn, wrap } from "../util.mjs";
+import { registrarCondicao, warn, wrap } from "../util.mjs";
 
 /**
  * Poderes dos suplementos que traziam a nota "faça manualmente" e precisam de código (os que se resolvem
@@ -336,7 +336,7 @@ export default {
 		if (!CONFIG.statusEffects?.[MONTADO]) {
 			const img = "icons/environment/creatures/horse-brown.webp";
 			const system = { changes: [], status: { category: "" } };
-			CONFIG.statusEffects[MONTADO] = { id: MONTADO, name: "Montado", img, category: "", description: "Montado na sua montaria: vale o deslocamento dela.", system, _source: { name: "Montado", img, statuses: [MONTADO], system } };
+			registrarCondicao(MONTADO, { name: "Montado", img, description: "Montado na sua montaria: vale o deslocamento dela.", system, _source: { name: "Montado", img, statuses: [MONTADO], system } });
 		}
 	}
 };

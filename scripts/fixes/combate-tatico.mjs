@@ -1,5 +1,5 @@
 import { MODULE_ID } from "../constants.mjs";
-import { warn, wrap } from "../util.mjs";
+import { registrarCondicao, warn, wrap } from "../util.mjs";
 
 /**
  * Situações de combate da Tabela 5-3 e das ações (JdA p. 233–239) que o sistema não aplicava:
@@ -213,7 +213,7 @@ function instalarCobertura() {
 	if (CONFIG.statusEffects?.[COBERTURA.id]) return;
 	const system = { changes: [{ key: "system.attributes.defesa.bonus", type: "add", value: "5", phase: "initial", priority: null }], status: { category: "" } };
 	const fonte = { name: COBERTURA.name, img: COBERTURA.img, statuses: [COBERTURA.id], duration: { expiry: "sceneEnd" }, system };
-	CONFIG.statusEffects[COBERTURA.id] = { id: COBERTURA.id, name: COBERTURA.name, img: COBERTURA.img, category: "", description: "", system, _source: fonte };
+	registrarCondicao(COBERTURA.id, { name: COBERTURA.name, img: COBERTURA.img, system, _source: fonte });
 }
 
 export default {
